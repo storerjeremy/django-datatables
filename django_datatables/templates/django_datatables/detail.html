@@ -1,0 +1,17 @@
+{% extends "django_datatables/base.html" %}
+{% load widget_tweaks buttons attr %}
+
+{% block title %}Report: {{ meta.verbose_name }}{% endblock %}
+{% block body_class %}{{ block.super }} {{ block.super }}-view{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+<h1>{{ meta.verbose_name }}</h1>
+{% if meta.description %}
+	<p>{{ meta.description }}</p>
+{% endif %}
+
+{% include "django_datatables/actions.html" with meta=meta exclude_HtmlWriter=1 %}
+{% include "django_datatables/datatable.html" with writer=writer id=id source_url=source_url %}
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% load buttons %}
+{% if meta.supports_HtmlWriter_writer and not exclude_HtmlWriter %}
+	{% imageonlybutton 'report' "View report" 'django_datatables_view' app=meta.app report_name=meta.report_name %}
+{% endif %}
+{% if meta.supports_UnicodeCsvWriter_writer and not exclude_UnicodeCsvWriter %}
+	{# {% imageonlybutton 'csv_file' "Download report" 'django_datatables_view' app=meta.app report_name=meta.report_name writer='csv' %} #}
+{% endif %}
+{% if meta.cache and not exclude_cache %}
+	{% imageonlybutton 'refresh' "Flush cache" 'django_datatables_cache_delete' app=meta.app report_name=meta.report_name next=request.path %}
+{% endif %}

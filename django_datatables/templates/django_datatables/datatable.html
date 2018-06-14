@@ -1,0 +1,45 @@
+<form id="{{ id }}-form">
+	{% csrf_token %}
+	<table class="display datatable ajax table table-striped table-bordered" 
+		   id="{{ id }}" 
+		   data-source-url="{{ source_url }}" 
+		   data-report="{{ report_class }}"
+		   {% if create_url %}data-create-url="{{ create_url }}"{% endif %}
+		   {% if submit_url %}
+			   	data-submit-url="{{ submit_url }}"
+			   	data-formset-prefix="{{ meta.form_prefix }}"
+		   {% endif %}
+		   {% if no_paging %}
+		   		data-datatables-no-paging="1"
+		   {% endif %}
+		   {% if no_buttons %}
+		   		data-datatables-no-buttons="1"
+		   {% endif %}
+		   {% if tabletools %}
+		   		data-tabletools="{{ tabletools }}"
+		   {% endif %}
+		   {% if no_search %}
+		   		data-datatables-no-search="1"
+		   {% endif %}
+		   data-default-sorting="{{ writer.default_sorting }}"
+		   >
+		<thead>
+			<tr class="headers">
+				{{ writer.thead }}
+			</tr>
+			{% if writer.has_filters %}
+			<tr class="filters">
+				{{ writer.filters }}
+			</tr>
+			{% endif %}
+		</thead>
+		<tbody></tbody>
+		<tfoot>
+			{% if writer.has_aggregates %}
+			<tr class="aggregates">
+				{{ writer.aggregates }}
+			</tr>
+			{% endif %}
+		</tfoot>
+	</table>
+</form>

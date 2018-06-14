@@ -1,0 +1,30 @@
+{% extends "django_datatables/base.html" %}
+
+{% block title %}Reports{% endblock %}
+{% block body_class %}{{ block.super }} {{ block.super }}-list{% endblock %}
+
+{% block content %}
+<h1>Reports</h1>
+
+<table class="display datatable table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th class="report">Report</th>
+			<th class="description">Description</th>
+			<th class="actions">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for report in reports %}
+			<tr>
+				<td>{{ report.meta.verbose_name }}</td>
+				<td>{{ report.meta.description }}</td>
+				<td>
+					{% include "django_datatables/actions.html" with meta=report.meta %}
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}
